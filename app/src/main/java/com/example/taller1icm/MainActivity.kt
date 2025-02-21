@@ -18,5 +18,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(baseContext, TicTacToeActivity::class.java))
         }
 
+        binding.countries.setOnClickListener {
+            startActivity(Intent(this, CountriesActivity::class.java))
+        }
+
+
     }
 }
