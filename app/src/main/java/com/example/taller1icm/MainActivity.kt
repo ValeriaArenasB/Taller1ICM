@@ -18,5 +18,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(baseContext, TicTacToeActivity::class.java))
         }
 
+
+        //Llamado a actividad randomGreet
+        binding.randomGreet.setOnClickListener {
+            //crear la variable con el texto del lenguaje elegifo
+            val seleccion = binding.spinner.selectedItem.toString()
+            val intent = Intent(baseContext, RandomGreetActivity::class.java)
+            //antes de iniciar el intent, agregar la selección como info. para pasar
+            intent.putExtra("seleccion", seleccion)
+            startActivity(intent)
+        }
+
     }
 }
