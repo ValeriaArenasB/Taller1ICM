@@ -31,11 +31,11 @@ class TicTacToeActivity : AppCompatActivity() {
         )
 
         buttons.forEachIndexed { index, button ->
-            button.setOnClickListener { onCellClicked(button, index) }
+            button.setOnClickListener { clickButton(button, index) }
         }
     }
 
-    private fun onCellClicked(button: Button, index: Int) {
+    private fun clickButton(button: Button, index: Int) {
         //para que no deje volver a seleccionar un boton si ya se ganó o ya esta seleccionada
         if (gameOver || button.text.isNotEmpty()) return
 
