@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat // para poder traer los colores en R de values
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+
 import com.example.taller1icm.databinding.ActivityTicTacToeBinding
 
 class TicTacToeActivity : AppCompatActivity() {
@@ -18,11 +19,11 @@ class TicTacToeActivity : AppCompatActivity() {
         binding = ActivityTicTacToeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupBoard()
+        iniciarTablero()
         binding.btnReset.setOnClickListener { reiniciarJuego() }
     }
 
-    private fun setupBoard() {
+    private fun iniciarTablero() {
         val buttons = arrayOf(
             binding.btn1, binding.btn2, binding.btn3,
             binding.btn4, binding.btn5, binding.btn6,
@@ -35,6 +36,7 @@ class TicTacToeActivity : AppCompatActivity() {
     }
 
     private fun onCellClicked(button: Button, index: Int) {
+        //para que no deje volver a seleccionar un boton si ya se ganó o ya esta seleccionada
         if (gameOver || button.text.isNotEmpty()) return
 
         //segun el index del boton, hallar en cual se hizo click
@@ -57,9 +59,10 @@ class TicTacToeActivity : AppCompatActivity() {
         }
 
         if (revisarGanador()) {
+            //con el binding al botón del layout se modifica su contenido
             binding.tvPlayerOne.text = "Ganador: $jugadorActual"
             gameOver = true
-        } else if (tableroLleno()) { //si con este turno se llenó el tablero y no se cumplión con condición ganador arriba, es empate
+        } else if (tableroLleno()) { //si con este turno se llenó el tablero y no se cumplió con condición ganador arriba, es empate
             binding.tvPlayerOne.text = "Empate"
             gameOver = true
         } else {
@@ -70,9 +73,11 @@ class TicTacToeActivity : AppCompatActivity() {
 
     private fun revisarGanador(): Boolean {
         for (i in 0..2) {
+            //si hay un mismo símbolo en las 3 filas de la columna i, ese jugador ganó. se revisa para todos los posibles i
             if (tablero[i][0] == jugadorActual && tablero[i][1] == jugadorActual && tablero[i][2] == jugadorActual) return true
             if (tablero[0][i] == jugadorActual && tablero[1][i] == jugadorActual && tablero[2][i] == jugadorActual) return true
         }
+        //se revisa si hay un mismo simbolo en alguno de los 2 diagonales posibles
         if (tablero[0][0] == jugadorActual && tablero[1][1] == jugadorActual && tablero[2][2] == jugadorActual) return true
         if (tablero[0][2] == jugadorActual && tablero[1][1] == jugadorActual && tablero[2][0] == jugadorActual) return true
 
@@ -80,10 +85,12 @@ class TicTacToeActivity : AppCompatActivity() {
     }
 
     private fun tableroLleno(): Boolean {
+        // si hay algo en todos los botones en tablero
         return tablero.all { row -> row.all { it.isNotEmpty() } }
     }
 
     private fun reiniciarJuego() {
+        //reasigna las variables a las inciales, borra el texto de símbolos del tablero e inicia con jugador X
         tablero = Array(3) { Array(3) { "" } }
         jugadorActual = "X"
         gameOver = false
@@ -95,6 +102,7 @@ class TicTacToeActivity : AppCompatActivity() {
             binding.btn7, binding.btn8, binding.btn9
         )
 
+        //toca volver a cambiar el color de los botones para que no queden con el color del juego anterior
         buttons.forEach {
             it.text = ""
             it.setBackgroundColor(ContextCompat.getColor(this, R.color.purple))

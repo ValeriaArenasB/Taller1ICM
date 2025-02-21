@@ -7,6 +7,8 @@
 
     <style name="Theme.Taller1ICM" parent="Base.Theme.Taller1ICM" />
 
+
+
     <!-- para cambiar el fondo de un botono toca usar android:backgroundTint -->
     <style name="TicTacToeButton">
         <item name="android:layout_width">100dp</item>
