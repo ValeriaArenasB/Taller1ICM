@@ -2,6 +2,9 @@ package com.example.taller1icm
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.taller1icm.databinding.ActivityCountriesBinding
@@ -34,22 +37,36 @@ class CountriesActivity : AppCompatActivity() {
     private fun loadCountriesFromJson(): List<Country> {
         val countryList = mutableListOf<Country>()
         try {
-            val jsonString = assets.open("paises.json").bufferedReader().use { it.readText() }
-            val jsonObject = JSONObject(jsonString)
-            val jsonArray = jsonObject.getJSONArray("paises")
+            // Leer el archivo JSON desde 'res/raw/'
+            val inputStream = resources.openRawResource(R.raw.paises)
+            val jsonString = BufferedReader(InputStreamReader(inputStream)).use { it.readText() }
 
-            for (i in 0 until jsonArray.length()) {
-                val item = jsonArray.getJSONObject(i)
-                val country = Country(
-                    item.getString("nombre_pais"),
-                    item.getString("capital"),
-                    item.getString("sigla")
-                )
-                countryList.add(country)
+            val jsonObject = JSONObject(jsonString)
+
+            // Verificar si el JSON tiene la clave "paises"
+            if (jsonObject.has("paises")) {
+                val jsonArray = jsonObject.getJSONArray("paises")
+
+                for (i in 0 until jsonArray.length()) {
+                    val item = jsonArray.getJSONObject(i)
+
+                    // Verificar si las claves existen antes de obtener sus valores
+                    val nombrePais = item.optString("nombre_pais", "Desconocido")
+                    val capital = item.optString("capital", "Sin capital")
+                    val sigla = item.optString("sigla", "N/A")
+
+                    val country = Country(nombrePais, capital, sigla)
+                    countryList.add(country)
+                }
+            } else {
+                Log.e("CountriesActivity", "JSON no contiene la clave 'paises'")
             }
         } catch (e: IOException) {
-            e.printStackTrace()
+            Log.e("CountriesActivity", "Error al leer el JSON: ${e.message}")
+        } catch (e: Exception) {
+            Log.e("CountriesActivity", "Error procesando el JSON: ${e.message}")
         }
         return countryList
     }
+
 }

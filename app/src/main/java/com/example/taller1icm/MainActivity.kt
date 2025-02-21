@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.countries.setOnClickListener {
-            startActivity(Intent(this, CountriesActivity::class.java))
+            val intent = Intent(this, CountriesActivity::class.java)
+            startActivity(intent)
         }
+
 
 
     }
