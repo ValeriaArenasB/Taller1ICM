@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Taller1ICM" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Taller1ICM" parent="Base.Theme.Taller1ICM" />
+
+    <!-- para cambiar el fondo de un botono toca usar android:backgroundTint -->
+    <style name="TicTacToeButton">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:backgroundTint"> @color/purple</item>
+    </style>
+
+
+
+
+
+</resources>

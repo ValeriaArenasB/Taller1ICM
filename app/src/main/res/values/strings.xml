@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="tictactoe">TicTacToe</string>
+    <string name="random_greet">Random Greet</string>
+    <string name="countries">Countries</string>
+    <string name="player_one_x">PLAYER ONE (X)</string>
+    <string name="player_two_o">PLAYER TWO (O)</string>
+    <string name="new_game">New Game</string>
+    <string-array name="languages">
+        <item>English</item>
+        <item>Español</item>
+        <item>Français</item>
+        <item>Deutsch</item>
+        <item>Italiano</item>
+
+    </string-array>
+</resources>
