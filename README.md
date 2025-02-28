@@ -1,4 +1,4 @@
-## 👥 Los Sustanciosos:
+## Grupo: 🧪Los Sustanciosos💉
 
 - **Valeria Arenas**
 - **Juan Felipe Galvis**
