@@ -27,6 +27,7 @@ class CountryAdapter(
         val country = countries[position]
         holder.nameTextView.text = country.nombrePais
         holder.itemView.setOnClickListener { onClick(country) }
+
     }
 
     override fun getItemCount() = countries.size
