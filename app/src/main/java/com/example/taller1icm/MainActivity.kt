@@ -12,19 +12,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Llamado a actividad TicTacToe
         binding.ticTacToe.setOnClickListener {
-            //no hace falta mandarle nada extra
             startActivity(Intent(baseContext, TicTacToeActivity::class.java))
         }
-
-
-        //Llamado a actividad randomGreet
+        
         binding.randomGreet.setOnClickListener {
-            //crear la variable con el texto del lenguaje elegifo
-            val seleccion = binding.spinner.selectedItem.toString()
-            val intent = Intent(baseContext, RandomGreetActivity::class.java)
-            //antes de iniciar el intent, agregar la selección como info. para pasar
+            val seleccion = binding.spinner.selectedItem.toString() //crear la variable con el texto del lenguaje elegifo
+            val intent = Intent(baseContext, RandomGreetActivity::class.java) //antes de iniciar el intent, agregar la selección como info. para pasar
             intent.putExtra("seleccion", seleccion)
             startActivity(intent)
         }
@@ -33,8 +27,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CountriesActivity::class.java)
             startActivity(intent)
         }
-
-
 
     }
 }
